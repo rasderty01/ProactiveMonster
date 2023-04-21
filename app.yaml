@@ -1,0 +1,13 @@
+runtime: nodejs16
+
+handlers:
+  - url: /public
+    static_dir: public
+    secure: always
+
+  - url: /.*
+    script: auto
+    secure: always
+
+env_variables:
+  ACCESS_TOKEN: pat-eu1-62b8433c-ba81-4333-bd7e-aa75cbe75bfe
