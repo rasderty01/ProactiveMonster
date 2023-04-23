@@ -1,0 +1,186 @@
+<div
+  class="flex-row mt-2 p-2 border-black rounded-lg text-center"
+  id="addOnServices"
+>
+  <form id="addOns">
+    <div class="mt-5">
+      <label for="raf" class="flex w-full font-bold">Other Services</label>
+      <select
+        id="raf"
+        name="raf"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option disabled value="">Select an Option</option>
+        <option value="Rent-a-flight (Return)">Rent-a-flight (Return)</option>
+        <option value="Rent-a-flight (One way)">Rent-a-flight (One way)</option>
+        <option value="Rent-a-flight with hotel accommodation">
+          Rent-a-flight with hotel accommodation
+        </option>
+      </select>
+    </div>
+    <div class="mt-5">
+      <label for="Currency1" class="flex w-full font-bold">Currency:</label>
+      <select
+        id="Currency1"
+        name="Currency1"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option disabled selected>Select an Option</option>
+        <option value="PHP">Philippine Peso (PHP)</option>
+        <option value="GBP">United Kingdom Pound (GBP)</option>
+      </select>
+    </div>
+    <div class="mt-5">
+      <label for="pas" class="flex w-full font-bold"
+        >Philippine Accommodation (Studio)</label
+      >
+      <select
+        id="pas"
+        name="pas"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option value="">Select an Option</option>
+        <option value="Option 1">Studio 1 (The Beacon Makati)</option>
+        <option value="Option 2">Studio 2 (SM Jazz Residences Makati)</option>
+      </select>
+    </div>
+    <div id="range1" class="flex-col hidden">
+      <div class="flex-col p-3 ml-2">
+        <label class="font-bold" for="AccommodationDays"
+          >Stay Duration (in day/days):
+          <output id="AccommodationValue" class="font-normal"></output
+        ></label>
+      </div>
+      <input
+        aria-label="AccommodationDays"
+        type="range"
+        name="AccommodationDays"
+        id="AccommodationDays"
+        min="1"
+        max="10"
+      />
+    </div>
+    <div class="text-left mt-5">
+      <div>
+        <input
+          type="checkbox"
+          name="har"
+          id="har"
+          value="Hotel Accommodation Reservation"
+          class="mr-2"
+        />
+        <label class="font-bold" for="har"
+          >Hotel Accommodation Reservation</label
+        >
+      </div>
+    </div>
+
+    <div class="text-left mt-5">
+      <input
+        type="checkbox"
+        name="mpa"
+        id="mpa"
+        value="Manila Personal Assistant"
+        class="mr-2"
+      />
+      <label class="font-bold" for="mpa">Manila Personal Assistant</label>
+    </div>
+    <div id="range" class="flex-col hidden">
+      <div class="flex-col p-3 ml-2">
+        <label class="font-bold" for="mpa"
+          >Duration (in day/days):
+          <output id="values" class="font-normal"></output
+        ></label>
+      </div>
+      <div>
+        <input
+          aria-label="range"
+          type="range"
+          name="days"
+          id="days"
+          min="1"
+          max="10"
+        />
+      </div>
+    </div>
+
+    <div class="flex mt-5">
+      <button
+        type="button"
+        class="w-auto ml-2 border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
+        id="AddOnButton"
+        onclick="AddOnGenerateInvoice()"
+      >
+        Generate Invoice
+      </button>
+      <div id="addOnLoading" class="hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 44 44"
+          stroke="#0a69aa"
+        >
+          <g fill="none" fill-rule="evenodd" stroke-width="2">
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="0s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="0s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <a
+          id="downloadInvoice2"
+          class="hidden border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out font-bold"
+          >Download Invoice</a
+        >
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Your form content -->
+<script src="addon.js" async></script>

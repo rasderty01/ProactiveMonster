@@ -1,0 +1,140 @@
+<div
+  class="flex-row mt-2 p-2 border-black rounded-lg text-center"
+  id="VisaServices"
+>
+  <form action="">
+    <div class="mt-5">
+      <label for="mySelectVS" class="flex w-full font-bold"
+        >Visa Services:</label
+      >
+      <select
+        id="mySelectVS"
+        name="visaservice"
+        class="w-96 mt-2 border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option value="">Select an Option</option>
+        <option value="Visit Visa">Visit Visa</option>
+        <option value="Settlement Visa">Settlement Visa</option>
+        <option value="Dependant Visa">
+          PBS/Skilled/Worker Dependant Visa
+        </option>
+      </select>
+    </div>
+
+    <div class="w-80 m-auto bg-yellow-300 mt-5 rounded-lg p-2 text-left">
+      <div>
+        <strong>Note:</strong> Please select the appropriate option based on
+        what was discussed and agreed upon during the consultation call.
+      </div>
+    </div>
+    <div class="mt-5">
+      <label for="mySelectP" class="flex w-full font-bold">Priority:</label>
+      <select
+        id="mySelectP"
+        name="priority"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option disabled selected>Select an Option</option>
+        <option value="Priority Service (7 working days)">
+          Priority Service (7 working days)
+        </option>
+        <option value="Priority Service (After Final Declaration)">
+          Priority Service (After Final Declaration)
+        </option>
+        <option value="">Standard Service</option>
+      </select>
+    </div>
+    <div class="mt-5">
+      <label for="Currency" class="flex w-full font-bold">Currency:</label>
+      <select
+        id="Currency"
+        name="Currency"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option disabled selected>Select an Option</option>
+        <option value="PHP">Philippine Peso (PHP)</option>
+        <option value="GBP">United Kingdom Pound (GBP)</option>
+      </select>
+    </div>
+    <div class="flex mt-5">
+      <button
+        type="button"
+        class="w-auto border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
+        id="VisaButton"
+        onclick="VisaGenerateInvoice()"
+      >
+        Generate Invoice
+      </button>
+      <div id="visaloading" class="hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 44 44"
+          stroke="#0a69aa"
+        >
+          <g fill="none" fill-rule="evenodd" stroke-width="2">
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="0s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="0s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <a
+          id="downloadInvoice"
+          class="border-2 hidden border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out font-bold"
+        ></a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Your form content -->
+<script defer>
+  initializeVisaServicesForm();
+</script>

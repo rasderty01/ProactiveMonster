@@ -32,6 +32,7 @@ const fetchContactByEmail = async (email) => {
           value: email,
         },
       ],
+      id: [],
       properties: [
         "firstname",
         "lastname",
@@ -53,6 +54,51 @@ const fetchContactByEmail = async (email) => {
   } catch (error) {
     console.error(error);
     return null;
+  }
+};
+
+const createHubspotTask = async (downloadUrl, contactId) => {
+  console.log("Initializing createHubspotTask function...");
+  console.log("downloadUrl:", downloadUrl);
+  console.log("contactId:", contactId);
+
+  const properties = {
+    hs_timestamp: new Date().toISOString(),
+    hs_task_body: `Click the link to view Generated Invoice: ${downloadUrl}`,
+    hubspot_owner_id: "805242080",
+    hs_task_subject: "New Invoice generated",
+    hs_task_status: "WAITING",
+    hs_task_priority: "HIGH",
+  };
+
+  const SimplePublicObjectInputForCreate = {
+    properties,
+    associations: [
+      {
+        to: { id: contactId },
+        types: [
+          { associationCategory: "HUBSPOT_DEFINED", associationTypeId: 10 },
+        ],
+      },
+    ],
+  };
+
+  const config = {
+    method: "post",
+    url: "https://api.hubapi.com/crm/v3/objects/tasks",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(SimplePublicObjectInputForCreate),
+  };
+
+  try {
+    const response = await axios(config);
+    console.log("Task created:", response.data);
+    return response.data.id;
+  } catch (error) {
+    console.error("Error creating task:", error);
   }
 };
 
@@ -79,9 +125,12 @@ app.post("/getinfo", async (req, res) => {
   }
 });
 
-app.post("/generateInvoice", async (req, res) => {
+app.post("/VisaGenerateInvoice", async (req, res) => {
   // Retrieve the required data from the request body
+  console.log("Request body:", req.body);
+
   const {
+    email,
     visaservice,
     priority,
     randomInvoiceNumber,
@@ -97,12 +146,14 @@ app.post("/generateInvoice", async (req, res) => {
   // Call the Google Apps Script API to generate the invoice
   // Replace the URL with the correct URL of your deployed Google Apps Script web app
   const url =
-    "https://script.google.com/macros/s/AKfycbw9WuYDOe2JDgEG2Tmcm5NoG5-Do4PW5aYIgfWGH4sjwoTTWUiIjCN1OaOtJD55ihvoBQ/exec";
+    "https://script.google.com/macros/s/AKfycbwplbPgqEiYiYS2PxgkEaOEMImiGqV1LnZ8xG7o9qmJYcne1EiWGeaQtf7Xl40U1_niRA/exec";
 
   try {
     const response = await axios.post(
       url,
       {
+        action: "VisaServicesForm",
+        email,
         firstname,
         lastname,
         address,
@@ -120,9 +171,88 @@ app.post("/generateInvoice", async (req, res) => {
         },
       }
     );
+    const contact = await fetchContactByEmail(email);
+    console.log("Contact:", contact);
+    console.log("Response:", response.data.url);
+
+    if (contact && contact.id) {
+      // Create the task
+      const taskId = await createHubspotTask(response.data.url, contact.id);
+      console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
+    }
+    // Send the generated invoice URL as a response
+    res.status(200).json({ url: response.data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to generate the invoice." });
+  }
+});
+
+app.post("/AddOnGenerateInvoice", async (req, res) => {
+  // Retrieve the required data from the request body
+  console.log("Request body:", req.body);
+  const {
+    firstname,
+    email,
+    lastname,
+    address,
+    country,
+    currency,
+    rentaflight,
+    HotelAccommR,
+    philAccommodation,
+    pasDays,
+    manilaPA,
+    manilapadays,
+    randomInvoiceNumber,
+    customerID,
+    postalcode,
+  } = req.body;
+
+  // Call the Google Apps Script API to generate the invoice
+  // Replace the URL with the correct URL of your deployed Google Apps Script web app
+  const url =
+    "https://script.google.com/macros/s/AKfycbwplbPgqEiYiYS2PxgkEaOEMImiGqV1LnZ8xG7o9qmJYcne1EiWGeaQtf7Xl40U1_niRA/exec";
+
+  try {
+    const response1 = await axios.post(
+      url,
+      {
+        action: "AddOnForm",
+        email,
+        firstname,
+        lastname,
+        address,
+        country,
+        currency,
+        rentaflight,
+        HotelAccommR,
+        philAccommodation,
+        pasDays,
+        manilaPA,
+        manilapadays,
+        randomInvoiceNumber,
+        customerID,
+        postalcode,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const contact = await fetchContactByEmail(email);
+
+    if (contact && contact.id) {
+      // Create the task
+      const taskId = await createHubspotTask(response1.data.url, contact.id);
+      console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
+    }
 
     // Send the generated invoice URL as a response
-    res.status(200).json({ url: response.data }); // Updated this line
+    res.status(200).json({ url: response1.data });
+    // Updated this line
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to generate the invoice." });

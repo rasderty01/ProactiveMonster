@@ -31,379 +31,140 @@
       class="container-1 bg-white-100 mx-auto max-w-4xl px-4 py-5"
     >
       <h1 class="mb-5 text-2xl font-bold">Generate Invoice</h1>
-      <form id="VV" name="visa-form">
-        <div class="flex flex-row">
-          <div>
-            <label class="mb-2 block font-bold text-gray-700" for="email"
-              >Search Email:</label
-            >
-            <div class="flex flex-row">
-              <div>
-                <input
-                  class="w-auto border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out mb-4 text-gray-700 placeholder-gray-400"
-                  type="email"
-                  name="email"
-                  id="inputEmail"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-
-              <div>
-                <button
-                  type="button"
-                  class="w-auto ml-2 border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
-                  onclick="getContactDetails()"
-                  id="submitbutton"
-                >
-                  Search
-                </button>
-              </div>
-              <div id="loading" class="hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  viewBox="0 0 44 44"
-                  stroke="#0a69aa"
-                >
-                  <g fill="none" fill-rule="evenodd" stroke-width="2">
-                    <circle cx="22" cy="22" r="1">
-                      <animate
-                        attributeName="r"
-                        begin="0s"
-                        dur="1.8s"
-                        values="1; 20"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.165, 0.84, 0.44, 1"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="stroke-opacity"
-                        begin="0s"
-                        dur="1.8s"
-                        values="1; 0"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.3, 0.61, 0.355, 1"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                    <circle cx="22" cy="22" r="1">
-                      <animate
-                        attributeName="r"
-                        begin="-0.9s"
-                        dur="1.8s"
-                        values="1; 20"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.165, 0.84, 0.44, 1"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="stroke-opacity"
-                        begin="-0.9s"
-                        dur="1.8s"
-                        values="1; 0"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.3, 0.61, 0.355, 1"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <table
-              class="table-auto border-2 border-gray-200 border-collapse w-full"
-              id="contactTable"
-            >
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 border-2">First Name</th>
-                  <th class="px-4 py-2 border-2">Last Name</th>
-                  <th class="px-4 py-2 border-2">Address</th>
-                  <th class="px-4 py-2 border-2">WhatsApp</th>
-                  <th class="px-4 py-2 border-2">Country</th>
-                  <th class="px-4 py-2 border-2">Postal Code</th>
-                </tr>
-              </thead>
-              <tbody class="px-4 py-2 text-center border-2 border-gray-200">
-                <!-- Add more rows as needed -->
-              </tbody>
-            </table>
-            <div class="flex flex-row font-montserrat font-bold mt-5">
-              <div class="rounded-lg p-2 text-black text-center font-bold">
-                I want to Generate:
-              </div>
-              <div>
-                <select
-                  aria-label="generator"
-                  name="generator"
-                  id="generator"
-                  class="border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                >
-                  <option value="">Select an Option</option>
-                  <option value="visa">Visa Service Invoice</option>
-                  <option value="addOns">Add-ons Invoice</option>
-                </select>
-              </div>
-            </div>
-            <div
-              class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
-              id="VisaServices"
-            >
-              <form action="">
-                <div class="mt-5">
-                  <label for="mySelectVS" class="flex w-full font-bold"
-                    >Visa Services:</label
-                  >
-                  <select
-                    id="mySelectVS"
-                    name="visaservice"
-                    class="w-96 mt-2 border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                    required
-                  >
-                    <option value="Visit Visa">Visit Visa</option>
-                    <option value="Settlement Visa">Settlement Visa</option>
-                    <option value="Dependant Visa">
-                      PBS/Skilled/Worker Dependant Visa
-                    </option>
-                  </select>
-                </div>
-
-                <div
-                  class="w-80 m-auto bg-yellow-300 mt-5 rounded-lg p-2 text-left"
-                >
-                  <div>
-                    <strong>Note:</strong> Please select the appropriate option
-                    based on what was discussed and agreed upon during the
-                    consultation call.
-                  </div>
-                </div>
-                <div class="mt-5">
-                  <label for="mySelectP" class="flex w-full font-bold"
-                    >Priority:</label
-                  >
-                  <select
-                    id="mySelectP"
-                    name="priority"
-                    class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                    required
-                  >
-                    <option disabled selected>Select an Option</option>
-                    <option value="Priority Service (7 working days)">
-                      Priority Service (7 working days)
-                    </option>
-                    <option value="Priority Service (After Final Declaration)">
-                      Priority Service (After Final Declaration)
-                    </option>
-                    <option value="">Standard Service</option>
-                  </select>
-                </div>
-                <div class="mt-5">
-                  <label for="Currency1" class="flex w-full font-bold"
-                    >Currency:</label
-                  >
-                  <select
-                    id="Currency1"
-                    name="Currency1"
-                    class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                    required
-                  >
-                    <option disabled selected>Select an Option</option>
-                    <option value="PHP">Philippine Peso (PHP)</option>
-                    <option value="GBP">United Kingdom Pound (GBP)</option>
-                  </select>
-                </div>
-                <div class="flex mt-5">
-                  <button
-                    type="button"
-                    class="w-auto border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
-                    id="VisaButton"
-                  >
-                    Generate Invoice
-                  </button>
-                  <div id="visaloading" class="hidden">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="44"
-                      height="44"
-                      viewBox="0 0 44 44"
-                      stroke="#0a69aa"
-                    >
-                      <g fill="none" fill-rule="evenodd" stroke-width="2">
-                        <circle cx="22" cy="22" r="1">
-                          <animate
-                            attributeName="r"
-                            begin="0s"
-                            dur="1.8s"
-                            values="1; 20"
-                            calcMode="spline"
-                            keyTimes="0; 1"
-                            keySplines="0.165, 0.84, 0.44, 1"
-                            repeatCount="indefinite"
-                          />
-                          <animate
-                            attributeName="stroke-opacity"
-                            begin="0s"
-                            dur="1.8s"
-                            values="1; 0"
-                            calcMode="spline"
-                            keyTimes="0; 1"
-                            keySplines="0.3, 0.61, 0.355, 1"
-                            repeatCount="indefinite"
-                          />
-                        </circle>
-                        <circle cx="22" cy="22" r="1">
-                          <animate
-                            attributeName="r"
-                            begin="-0.9s"
-                            dur="1.8s"
-                            values="1; 20"
-                            calcMode="spline"
-                            keyTimes="0; 1"
-                            keySplines="0.165, 0.84, 0.44, 1"
-                            repeatCount="indefinite"
-                          />
-                          <animate
-                            attributeName="stroke-opacity"
-                            begin="-0.9s"
-                            dur="1.8s"
-                            values="1; 0"
-                            calcMode="spline"
-                            keyTimes="0; 1"
-                            keySplines="0.3, 0.61, 0.355, 1"
-                            repeatCount="indefinite"
-                          />
-                        </circle>
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex">
-                  <a
-                    id="downloadInvoice"
-                    class="hidden border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out font-bold"
-                    >Download Invoice</a
-                  >
-                </div>
-              </form>
+      <div class="flex flex-row">
+        <div>
+          <label class="mb-2 block font-bold text-gray-700" for="email"
+            >Search Email:</label
+          >
+          <div class="flex flex-row">
+            <div>
+              <input
+                class="w-auto border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out mb-4 text-gray-700 placeholder-gray-400"
+                type="email"
+                name="email"
+                id="inputEmail"
+                placeholder="Enter your email"
+                required
+              />
             </div>
 
-            <div
-              class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
-              id="addOnServices"
-            >
-              <form action="">
-                <div class="mt-5">
-                  <label for="raf" class="flex w-full font-bold"
-                    >Other Services</label
-                  >
-                  <select
-                    id="raf"
-                    name="raf"
-                    class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                    required
-                  >
-                    <option disabled value="">Select an Option</option>
-                    <option value="Rent-a-flight (Return)">
-                      Rent-a-flight (Return)
-                    </option>
-                    <option value="Rent-a-flight (One way)">
-                      Rent-a-flight (One way)
-                    </option>
-                    <option value="Rent-a-flight with hotel accommodation">
-                      Rent-a-flight with hotel accommodation
-                    </option>
-                  </select>
-                </div>
-                <div class="mt-5">
-                  <label for="Currency" class="flex w-full font-bold"
-                    >Currency:</label
-                  >
-                  <select
-                    id="Currency"
-                    name="Currency"
-                    class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-                    required
-                  >
-                    <option disabled selected>Select an Option</option>
-                    <option value="PHP">Philippine Peso (PHP)</option>
-                    <option value="GBP">United Kingdom Pound (GBP)</option>
-                  </select>
-                </div>
-                <div class="text-left ml-20 mt-5">
-                  <div>
-                    <input
-                      type="checkbox"
-                      name="har"
-                      id="har"
-                      value="Hotel Accommodation Reservation"
+            <div>
+              <button
+                type="button"
+                class="w-auto ml-2 border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
+                onclick="getContactDetails()"
+                id="submitbutton"
+              >
+                Search
+              </button>
+            </div>
+            <div id="loading" class="hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                viewBox="0 0 44 44"
+                stroke="#0a69aa"
+              >
+                <g fill="none" fill-rule="evenodd" stroke-width="2">
+                  <circle cx="22" cy="22" r="1">
+                    <animate
+                      attributeName="r"
+                      begin="0s"
+                      dur="1.8s"
+                      values="1; 20"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.165, 0.84, 0.44, 1"
+                      repeatCount="indefinite"
                     />
-                    <label class="font-normal" for="har"
-                      >Hotel Accommodation Reservation</label
-                    >
-                  </div>
-
-                  <div>
-                    <input
-                      type="checkbox"
-                      name="pas"
-                      id="pas"
-                      value="Philippine Accommodation (Studio)"
+                    <animate
+                      attributeName="stroke-opacity"
+                      begin="0s"
+                      dur="1.8s"
+                      values="1; 0"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.3, 0.61, 0.355, 1"
+                      repeatCount="indefinite"
                     />
-                    <label class="font-normal" for="pas"
-                      >Philippine Accommodation (Studio)</label
-                    >
-                  </div>
-
-                  <div>
-                    <input
-                      type="checkbox"
-                      name="mpa"
-                      id="mpa"
-                      value="Manila Personal Assistant"
+                  </circle>
+                  <circle cx="22" cy="22" r="1">
+                    <animate
+                      attributeName="r"
+                      begin="-0.9s"
+                      dur="1.8s"
+                      values="1; 20"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.165, 0.84, 0.44, 1"
+                      repeatCount="indefinite"
                     />
-                    <label class="font-normal" for="mpa"
-                      >Manila Personal Assistant</label
-                    >
-                  </div>
-                  <div id="range" class="flex-col hidden">
-                    <div class="flex-col p-3 ml-2">
-                      <label class="font-normal" for="mpa"
-                        >Number of Days: <output id="values"></output
-                      ></label>
-                    </div>
-                    <div class="flex-col p-3 ml-2">
-                      <input
-                        aria-label="range"
-                        type="range"
-                        name="days"
-                        id="days"
-                        min="1"
-                        max="10"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="flex mt-5">
-                  <button
-                    type="button"
-                    class="w-auto ml-2 border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
-                    id="AddOnButton"
-                  >
-                    Generate Invoice
-                  </button>
-                </div>
-                <script src="index.js"></script>
-              </form>
+                    <animate
+                      attributeName="stroke-opacity"
+                      begin="-0.9s"
+                      dur="1.8s"
+                      values="1; 0"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.3, 0.61, 0.355, 1"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
+              </svg>
             </div>
           </div>
+          <table
+            class="table-auto border-2 border-gray-200 border-collapse w-full"
+            id="contactTable"
+          >
+            <thead>
+              <tr>
+                <th class="px-4 py-2 border-2">First Name</th>
+                <th class="px-4 py-2 border-2">Last Name</th>
+                <th class="px-4 py-2 border-2">Address</th>
+                <th class="px-4 py-2 border-2">WhatsApp</th>
+                <th class="px-4 py-2 border-2">Country</th>
+                <th class="px-4 py-2 border-2">Postal Code</th>
+              </tr>
+            </thead>
+            <tbody class="px-4 py-2 text-center border-2 border-gray-200">
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+          <div class="flex flex-row font-montserrat font-bold mt-5">
+            <div class="rounded-lg p-2 text-black text-center font-bold">
+              I want to Generate:
+            </div>
+            <div>
+              <select
+                aria-label="generator"
+                name="generator"
+                id="generator"
+                class="border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+              >
+                <option value="">Select an Option</option>
+                <option value="visa">Visa Service Invoice</option>
+                <option value="addOns">Add-ons Invoice</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="addonFormContainer"
+          ></div>
+
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="visaservicesFormContainer"
+          ></div>
+          <script type="module" src="index.js"></script>
+          <script src="hubspot.js"></script>
+          <script src="visaservices.js"></script>
+          <script src="addon.js"></script>
         </div>
-      </form>
+      </div>
     </div>
   </body>
 </html>
