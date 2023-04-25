@@ -41,6 +41,7 @@ const AddOnGenerateInvoice = async () => {
     manilapadays = "";
   }
 
+  let priorityService = document.getElementById("priorityService").value;
   console.log(manilaPA);
   console.log(manilapadays);
 
@@ -83,6 +84,7 @@ const AddOnGenerateInvoice = async () => {
       country,
       currency,
       rentaflight,
+      priorityService,
       HotelAccommR,
       philAccommodation,
       pasDays,

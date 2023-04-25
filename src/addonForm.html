@@ -9,13 +9,30 @@
         id="raf"
         name="raf"
         class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-        required
       >
-        <option disabled value="">Select an Option</option>
+        <option value="" selected>Select an Option</option>
         <option value="Rent-a-flight (Return)">Rent-a-flight (Return)</option>
         <option value="Rent-a-flight (One way)">Rent-a-flight (One way)</option>
         <option value="Rent-a-flight with hotel accommodation">
           Rent-a-flight with hotel accommodation
+        </option>
+      </select>
+    </div>
+    <div class="mt-5">
+      <label for="priorityService" class="flex w-full font-bold"
+        >Priority Services</label
+      >
+      <select
+        id="priorityService"
+        name="priorityService"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+      >
+        <option value="" selected>Select an Option</option>
+        <option value="Priority Service (7 working days)">
+          Priority Service (7 working days)
+        </option>
+        <option value="Priority Service (After Final Declaration)">
+          Priority Service (After Final Declaration)
         </option>
       </select>
     </div>
@@ -27,8 +44,7 @@
         class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
         required
       >
-        <option disabled selected>Select an Option</option>
-        <option value="PHP">Philippine Peso (PHP)</option>
+        <option value="PHP" selected>Philippine Peso (PHP)</option>
         <option value="GBP">United Kingdom Pound (GBP)</option>
       </select>
     </div>
@@ -40,7 +56,6 @@
         id="pas"
         name="pas"
         class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
-        required
       >
         <option value="">Select an Option</option>
         <option value="Option 1">Studio 1 (The Beacon Makati)</option>

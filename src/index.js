@@ -1,17 +1,25 @@
 let formSelect = document.getElementById("generator");
 let visaForm = document.getElementById("visaservicesFormContainer");
 let addOnsForm = document.getElementById("addonFormContainer");
+let uploadForm = document.getElementById("uploadFormContainer");
 
 formSelect.addEventListener("change", function () {
   if (formSelect.value === "visa") {
     visaForm.classList.remove("hidden");
     addOnsForm.classList.add("hidden");
+    uploadForm.classList.add("hidden");
   } else if (formSelect.value === "addOns") {
     visaForm.classList.add("hidden");
     addOnsForm.classList.remove("hidden");
+    uploadForm.classList.add("hidden");
+  } else if (formSelect.value === "payProof") {
+    visaForm.classList.add("hidden");
+    addOnsForm.classList.add("hidden");
+    uploadForm.classList.remove("hidden");
   } else {
     visaForm.classList.add("hidden");
     addOnsForm.classList.add("hidden");
+    uploadForm.classList.add("hidden");
   }
 });
 
@@ -71,3 +79,5 @@ loadForm("addonForm", () => {
   }
 });
 loadForm("visaservicesForm", () => {});
+
+loadForm("uploadForm", () => {});

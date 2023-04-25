@@ -102,11 +102,64 @@ const createHubspotTask = async (downloadUrl, contactId) => {
   }
 };
 
+const createPaymentProofTask = async (downloadUrl, contact) => {
+  console.log("Initializing createHubspotTask function...");
+  console.log("downloadUrl:", downloadUrl);
+  console.log("contactId:", contact);
+
+  const lastname = contact.properties.lastname;
+  const firstname = contact.properties.firstname;
+  const contactId = contact.id;
+  const modeOfPay = body.modeofpayment;
+  const referenceID = body.referenceID;
+
+  const properties = {
+    hs_timestamp: new Date().toISOString(),
+    hs_task_body: `Click the link to view submitted Payment Proof: ${downloadUrl}\n\nMode of Payment: ${modeOfPay}\nReference ID: ${referenceID}`,
+    hubspot_owner_id: "805242080",
+    hs_task_subject: `Payment Proof for ${firstname} ${lastname}`,
+    hs_task_status: "WAITING",
+    hs_task_priority: "HIGH",
+  };
+
+  const SimplePublicObjectInputForCreate = {
+    properties,
+    associations: [
+      {
+        to: { id: contactID },
+        types: [
+          { associationCategory: "HUBSPOT_DEFINED", associationTypeId: 10 },
+        ],
+      },
+    ],
+  };
+
+  const config = {
+    method: "post",
+    url: "https://api.hubapi.com/crm/v3/objects/tasks",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(SimplePublicObjectInputForCreate),
+  };
+
+  try {
+    const response = await axios(config);
+    console.log("Task created:", response.data);
+    return response.data.id;
+  } catch (error) {
+    console.error("Error creating task:", error);
+  }
+};
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "public"))); // Serve static files
+app.use(express.static(path.join(__dirname, "src")));
+app.use(express.static(path.join(__dirname, "dist")));
+// Serve static files
 
 app.post("/getinfo", async (req, res) => {
   const email = req.body.email;
@@ -199,6 +252,7 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
     country,
     currency,
     rentaflight,
+    priorityService,
     HotelAccommR,
     philAccommodation,
     pasDays,
@@ -226,6 +280,7 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
         country,
         currency,
         rentaflight,
+        priorityService,
         HotelAccommR,
         philAccommodation,
         pasDays,
@@ -259,10 +314,53 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
   }
 });
 
-//app.post("/testGenerateInvoice", async (req, res) => {
-// console.log("Request body:", req.body);
-//  res.status(200).json({ message: "Request received" });
-//});
+app.post("/uploadForm", async (req, res) => {
+  try {
+    // Call the Google Apps Script API to process the file and create the task
+    // Replace the URL with the correct URL of your deployed Google Apps Script web app
+    const body = req.body;
+
+    const url =
+      "https://script.google.com/macros/s/AKfycbxJwR1XyvQ_rkrUS8KX-IjDEE2fjeaIIbs7WGZn0WELxWN89t17LTiZzJSTUVoKcLj9vg/exec";
+
+    const response = await axios.post(
+      url,
+      {
+        data: req.body,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const contact = await fetchContactByEmail(req.body.email);
+    console.log("Contact:", contact);
+    console.log("Email:", req.body.email);
+    console.log("Mode of Payment:", req.body.modeofpayment);
+    console.log("Reference ID:", req.body.referenceID);
+
+    if (contact && contact.id) {
+      // Create the task
+      const taskId = await createPaymentProofTask(
+        response.data.url,
+        contact,
+        body
+      );
+      console.log(response.data.url);
+      console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
+    }
+
+    // Send the generated invoice URL as a response
+    res.status(200).json({ url: response.data.url });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "Failed to process the file and create the task." });
+  }
+});
 
 const PORT = process.env.PORT || 3000;
 

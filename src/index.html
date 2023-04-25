@@ -7,10 +7,6 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
       rel="stylesheet"
     />
@@ -18,8 +14,18 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
       rel="stylesheet"
     />
-    <title>MGiUK Visa Application</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="toastify.js"></script>
+    <link href="/output.css" rel="stylesheet" />
+    <title>MGIUK Invoice Generator</title>
   </head>
 
   <body class="font-montserrat font-open-sans font-sans">
@@ -28,9 +34,11 @@
     <!-- visit visa -->
     <div
       id="Visit-Visa"
-      class="container-1 bg-white-100 mx-auto max-w-4xl px-4 py-5"
+      class="container-1 mt-2 bg-white-100 mx-auto max-w-4xl p-4 bg-green-50 rounded-xl border-stone-950 border-2"
     >
-      <h1 class="mb-5 text-2xl font-bold">Generate Invoice</h1>
+      <h1 class="mb-5 text-2xl font-bold text-center">
+        MGIUK Invoice Generator
+      </h1>
       <div class="flex flex-row">
         <div>
           <label class="mb-2 block font-bold text-gray-700" for="email"
@@ -135,18 +143,19 @@
           </table>
           <div class="flex flex-row font-montserrat font-bold mt-5">
             <div class="rounded-lg p-2 text-black text-center font-bold">
-              I want to Generate:
+              I want to:
             </div>
             <div>
               <select
                 aria-label="generator"
                 name="generator"
                 id="generator"
-                class="border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+                class="border-2 ml-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center"
               >
                 <option value="">Select an Option</option>
-                <option value="visa">Visa Service Invoice</option>
-                <option value="addOns">Add-ons Invoice</option>
+                <option value="visa">Generate Visa Service Invoice</option>
+                <option value="addOns">Generate Add-ons Invoice</option>
+                <option value="payProof">Upload Payment Proof</option>
               </select>
             </div>
           </div>
@@ -159,10 +168,22 @@
             class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
             id="visaservicesFormContainer"
           ></div>
-          <script type="module" src="index.js"></script>
+
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="uploadFormContainer"
+          ></div>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0"></script>
+          <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/toastify-js"
+          ></script>
+
+          <script src="index.js"></script>
           <script src="hubspot.js"></script>
           <script src="visaservices.js"></script>
           <script src="addon.js"></script>
+          <script src="uploadForm.js"></script>
         </div>
       </div>
     </div>

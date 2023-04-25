@@ -1,0 +1,124 @@
+<div
+  class="flex-row mt-2 p-2 border-black rounded-lg text-center w-full"
+  id="uploadPayProof"
+>
+  <form id="uploadPayProof">
+    <div class="mt-5 text-center">
+      <span
+        class="font-small text-left bg-yellow-100 rounded-lg p-4 inline-block"
+        ><strong>Note:</strong> If you're the Sponsor, search for the
+        Applicant's email and verify the generated info is correct.
+      </span>
+    </div>
+
+    <div class="mt-5">
+      <label for="modeOfPay" class="flex w-full font-bold mb-2"
+        >What was your mode of payment?</label
+      >
+      <select
+        id="modeOfPay"
+        name="modeOfPay"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      >
+        <option value="UnionBank">UnionBank (PH BANK)</option>
+        <option value="GCash">GCash (PH BANK)</option>
+        <option value="PayPal">PayPal (UK BANK)</option>
+        <option value="Tide">Tide (UK BANK)</option>
+      </select>
+    </div>
+
+    <div class="mt-5">
+      <label for="referenceID" class="flex w-full font-bold mb-2"
+        >Please Enter your Proof-of-Payment Reference ID:</label
+      >
+      <input
+        type="text"
+        name="referenceID"
+        id="referenceID"
+        class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-bold"
+        required
+      />
+    </div>
+
+    <div class="mt-5">
+      <label for="uploadFile" class="flex w-full font-bold mb-2">Upload</label>
+
+      <input
+        type="file"
+        name="uploadFile"
+        id="uploadFile"
+        class="w-auto ml-2 border-2 border-white rounded-lg p-2 text-left flex"
+      />
+    </div>
+
+    <div class="flex mt-5">
+      <button
+        type="button"
+        class="w-auto ml-2 border-2 border-white rounded-lg p-2 bg-blue-500 text-white hover:opacity-40 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
+        id="uploadButton"
+        onclick="uploadFormData()"
+      >
+        Upload Payment Proof
+      </button>
+      <div id="uploadLoading" class="hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 44 44"
+          stroke="#0a69aa"
+        >
+          <g fill="none" fill-rule="evenodd" stroke-width="2">
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="0s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="0s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle cx="22" cy="22" r="1">
+              <animate
+                attributeName="r"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 20"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.165, 0.84, 0.44, 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="stroke-opacity"
+                begin="-0.9s"
+                dur="1.8s"
+                values="1; 0"
+                calcMode="spline"
+                keyTimes="0; 1"
+                keySplines="0.3, 0.61, 0.355, 1"
+                repeatCount="indefinite"
+              />
+            </circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </form>
+</div>
+
+.
