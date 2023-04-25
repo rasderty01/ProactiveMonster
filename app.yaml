@@ -10,4 +10,4 @@ handlers:
     secure: always
 
 env_variables:
-  ACCESS_TOKEN: pat-eu1-62b8433c-ba81-4333-bd7e-aa75cbe75bfe
+  ACCESS_TOKEN: pat-eu1-5fe19fee-9642-48fc-8494-0a9a9ca55d51
