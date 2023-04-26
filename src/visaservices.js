@@ -1,16 +1,12 @@
 const VisaGenerateInvoice = async () => {
-  console.log("VisaGenerateInvoice function called");
-
   if (!contactInfo) {
-    alert("Please search for a contact first.");
+    showToast("Please search for a contact first", "warning", "center");
     return;
   }
 
   document.getElementById("visaloading").classList.remove("hidden");
   document.getElementById("VisaButton").classList.add("hidden");
   const email = document.getElementById("inputEmail").value;
-
-  // Get the required data for generating the invoice (e.g., visaservice, priority)
   const visaservice = document.getElementById("mySelectVS").value;
   const priority = document.getElementById("mySelectP").value;
   const randomNumber = Math.floor(Math.random() * 9000 + 1000);
@@ -39,8 +35,6 @@ const VisaGenerateInvoice = async () => {
   const customerID =
     firstLetterOfFirstname + firstLetterOfLastname + "-" + randomNumber;
 
-  console.log("Customer ID:", customerID);
-
   try {
     const requestData = {
       action: "VisaServicesForm",
@@ -57,8 +51,6 @@ const VisaGenerateInvoice = async () => {
       postalcode,
     };
 
-    console.log("Request data:", requestData);
-
     const response = await fetch("/VisaGenerateInvoice", {
       method: "POST",
       headers: {
@@ -67,7 +59,7 @@ const VisaGenerateInvoice = async () => {
       body: JSON.stringify(requestData),
     });
     const data = await response.json();
-    console.log("Success:", data);
+    showToast("Your Invoice is ready to download!", "success", "center");
 
     const downloadButton = document.getElementById("downloadInvoice");
     downloadButton.innerText = "Download Invoice";
@@ -78,16 +70,11 @@ const VisaGenerateInvoice = async () => {
 
     // Add this line to show the button
   } catch (error) {
-    alert("Error generating invoice. Please try again.");
+    showToast(
+      "Error generating invoice. Refreshing Page....",
+      "error",
+      "center"
+    );
     location.reload();
-    document.getElementById("visaloading").classList.remove("hidden");
   }
 };
-
-function initializeVisaServicesForm() {
-  console.log("Initializing Visa Services Form");
-
-  const generateInvoiceButtonVisa = document.getElementById("VisaButton");
-}
-
-document.addEventListener("DOMContentLoaded", initializeVisaServicesForm);

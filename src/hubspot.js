@@ -1,7 +1,7 @@
 const getContactDetails = async () => {
   const email = document.getElementById("inputEmail").value;
   if (!email) {
-    showToast("Please search for a contact first.", "error");
+    showToast("Please search for a contact first.", "warning", "center");
     return;
   }
 
@@ -10,7 +10,7 @@ const getContactDetails = async () => {
     console.log(contact.id);
     displayContactDetails(contact, email);
   } else {
-    showToast("No contact found with this email address.", "warning");
+    showToast("Email not found. Try again.", "warning", "center");
     document.getElementById("loading").classList.add("hidden");
     document.getElementById("submitbutton").classList.remove("hidden");
   }
@@ -34,7 +34,7 @@ const fetchContactByEmail = async (email) => {
 
     return await response.json();
   } catch (error) {
-    console.error(error);
+    showToast("Error. Please try again.", "warning", "center");
     return null;
   }
 };

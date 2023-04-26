@@ -1,6 +1,6 @@
 const AddOnGenerateInvoice = async () => {
   if (!contactInfo) {
-    alert("Please search for a contact first.");
+    showToast("Please search for a contact first", "warning", "center");
     return;
   }
 
@@ -18,9 +18,15 @@ const AddOnGenerateInvoice = async () => {
     HotelAccommR = "";
   }
 
-  console.log(HotelAccommR);
-
   var philAccommodation = document.getElementById("pas").value;
+
+  var consultation = document.getElementById("consultation").value;
+
+  if (consultation === "Option 1" || consultation === "Option 2") {
+    var consultation = document.getElementById("consultation").value;
+  } else {
+    consultation = "";
+  }
 
   if (philAccommodation === "Option 1" || philAccommodation === "Option 2") {
     var philAccommodation = document.getElementById("pas").value;
@@ -29,7 +35,6 @@ const AddOnGenerateInvoice = async () => {
     philAccommodation = "";
     pasDays = "";
   }
-  console.log(pasDays);
 
   var manilaPA = document.querySelector("#mpa");
 
@@ -42,8 +47,6 @@ const AddOnGenerateInvoice = async () => {
   }
 
   let priorityService = document.getElementById("priorityService").value;
-  console.log(manilaPA);
-  console.log(manilapadays);
 
   // Get the required data for generating the invoice (e.g., visaservice, priority)
   const randomNumber = Math.floor(Math.random() * 9000 + 1000);
@@ -72,8 +75,6 @@ const AddOnGenerateInvoice = async () => {
   const customerID =
     firstLetterOfFirstname + firstLetterOfLastname + "-" + randomNumber;
 
-  console.log("Customer ID:", customerID);
-
   try {
     const dataAddOn = {
       action: "AddOnForm",
@@ -83,6 +84,7 @@ const AddOnGenerateInvoice = async () => {
       address,
       country,
       currency,
+      consultation,
       rentaflight,
       priorityService,
       HotelAccommR,
@@ -95,9 +97,6 @@ const AddOnGenerateInvoice = async () => {
       postalcode,
     };
 
-    console.log("Request data:", dataAddOn);
-    console.log("Request data:", email);
-
     const response1 = await fetch("/AddOnGenerateInvoice", {
       method: "POST",
       headers: {
@@ -106,7 +105,7 @@ const AddOnGenerateInvoice = async () => {
       body: JSON.stringify(dataAddOn),
     });
     const data = await response1.json();
-    console.log("Success:", data);
+    showToast("Your Invoice is ready to download!", "success", "center");
 
     const downloadButton = document.getElementById("downloadInvoice2");
     downloadButton.innerText = "Download Invoice";
@@ -115,8 +114,11 @@ const AddOnGenerateInvoice = async () => {
     downloadButton.classList.remove("hidden");
     document.getElementById("addOnLoading").classList.add("hidden"); // Add this line to show the button
   } catch (error) {
-    alert("Error generating invoice. Please try again.");
-    const formvisa = document.getElementById("addOns");
-    formvisa.reset();
+    showToast(
+      "Error generating invoice. Refreshing page....",
+      "error",
+      "center"
+    );
+    location.reload();
   }
 };

@@ -1,11 +1,11 @@
 // toastify-custom.js
-function showToast(message, type = "info") {
+function showToast(message, type = "info", position) {
   const toastOptions = {
     text: message,
     duration: 3000,
     close: true,
     gravity: "top",
-    position: "right",
+    position: position,
     className: "rounded-lg shadow-lg text-white",
     style: {
       background: "",
@@ -30,3 +30,20 @@ function showToast(message, type = "info") {
 
   Toastify(toastOptions).showToast();
 }
+
+const showToastWithRedirect = (message, type, position, duration, url) => {
+  let count = 0;
+
+  const showToastPerSecond = setInterval(() => {
+    let countdownMessage = `${message} ${5 - count}`;
+    showToast(countdownMessage, type, position, duration);
+    count++;
+
+    if (count === 5) {
+      clearInterval(showToastPerSecond);
+      setTimeout(() => {
+        window.location.href = url;
+      }, duration);
+    }
+  }, 1000); // Interval of 1000 milliseconds (1 second)
+};

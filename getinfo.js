@@ -1,9 +1,15 @@
 const hubspot = require("@hubspot/api-client");
 require("dotenv").config();
+const multer = require("multer");
 const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 15 * 1024 * 1024 }, // Set the maximum file size limit (in bytes). In this example, it's 15 MB.
+});
 
 if (!process.env.ACCESS_TOKEN) {
   throw new Error("Missing ACCESS_TOKEN environment variable.");
@@ -102,20 +108,20 @@ const createHubspotTask = async (downloadUrl, contactId) => {
   }
 };
 
-const createPaymentProofTask = async (downloadUrl, contact) => {
+const createPaymentProofTask = async (downloadUrl, contact, body) => {
   console.log("Initializing createHubspotTask function...");
   console.log("downloadUrl:", downloadUrl);
-  console.log("contactId:", contact);
+  console.log("contactId:", contact.id);
 
   const lastname = contact.properties.lastname;
   const firstname = contact.properties.firstname;
-  const contactId = contact.id;
+  const contactID = contact.id;
   const modeOfPay = body.modeofpayment;
   const referenceID = body.referenceID;
 
   const properties = {
     hs_timestamp: new Date().toISOString(),
-    hs_task_body: `Click the link to view submitted Payment Proof: ${downloadUrl}\n\nMode of Payment: ${modeOfPay}\nReference ID: ${referenceID}`,
+    hs_task_body: `Click the link to view submitted Payment Proof: ${downloadUrl}<br><br>Mode of Payment: ${modeOfPay}<br>Reference ID: ${referenceID}`,
     hubspot_owner_id: "805242080",
     hs_task_subject: `Payment Proof for ${firstname} ${lastname}`,
     hs_task_status: "WAITING",
@@ -199,7 +205,7 @@ app.post("/VisaGenerateInvoice", async (req, res) => {
   // Call the Google Apps Script API to generate the invoice
   // Replace the URL with the correct URL of your deployed Google Apps Script web app
   const url =
-    "https://script.google.com/macros/s/AKfycbwplbPgqEiYiYS2PxgkEaOEMImiGqV1LnZ8xG7o9qmJYcne1EiWGeaQtf7Xl40U1_niRA/exec";
+    "https://script.google.com/macros/s/AKfycbxAWLmRc-oqEDlLH4F93Fx5CFlEQx3gW5kXwcmTwadz750AO76GmLCi4iIitblL164Z/exec";
 
   try {
     const response = await axios.post(
@@ -251,6 +257,7 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
     address,
     country,
     currency,
+    consultation,
     rentaflight,
     priorityService,
     HotelAccommR,
@@ -266,7 +273,7 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
   // Call the Google Apps Script API to generate the invoice
   // Replace the URL with the correct URL of your deployed Google Apps Script web app
   const url =
-    "https://script.google.com/macros/s/AKfycbwplbPgqEiYiYS2PxgkEaOEMImiGqV1LnZ8xG7o9qmJYcne1EiWGeaQtf7Xl40U1_niRA/exec";
+    "https://script.google.com/macros/s/AKfycbxAWLmRc-oqEDlLH4F93Fx5CFlEQx3gW5kXwcmTwadz750AO76GmLCi4iIitblL164Z/exec";
 
   try {
     const response1 = await axios.post(
@@ -279,6 +286,7 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
         address,
         country,
         currency,
+        consultation,
         rentaflight,
         priorityService,
         HotelAccommR,
@@ -314,19 +322,23 @@ app.post("/AddOnGenerateInvoice", async (req, res) => {
   }
 });
 
-app.post("/uploadForm", async (req, res) => {
+app.post("/uploadForm", upload.single("file"), async (req, res) => {
   try {
     // Call the Google Apps Script API to process the file and create the task
     // Replace the URL with the correct URL of your deployed Google Apps Script web app
-    const body = req.body;
-
     const url =
       "https://script.google.com/macros/s/AKfycbxJwR1XyvQ_rkrUS8KX-IjDEE2fjeaIIbs7WGZn0WELxWN89t17LTiZzJSTUVoKcLj9vg/exec";
+
+    const base64FileData = req.file.buffer.toString("base64");
 
     const response = await axios.post(
       url,
       {
-        data: req.body,
+        data: {
+          ...req.body,
+          fileData: `data:${req.file.mimetype};base64,${base64FileData}`,
+          fileName: req.file.originalname,
+        },
       },
       {
         headers: {
@@ -336,17 +348,13 @@ app.post("/uploadForm", async (req, res) => {
     );
 
     const contact = await fetchContactByEmail(req.body.email);
-    console.log("Contact:", contact);
-    console.log("Email:", req.body.email);
-    console.log("Mode of Payment:", req.body.modeofpayment);
-    console.log("Reference ID:", req.body.referenceID);
 
     if (contact && contact.id) {
       // Create the task
       const taskId = await createPaymentProofTask(
         response.data.url,
         contact,
-        body
+        req.body
       );
       console.log(response.data.url);
       console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
