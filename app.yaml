@@ -1,8 +1,8 @@
 runtime: nodejs16
 
 handlers:
-  - url: /public
-    static_dir: public
+  - url: /src
+    static_dir: src
     secure: always
 
   - url: /.*
