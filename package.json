@@ -14,10 +14,10 @@
   "main": "mgiuk.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node getinfo.js",
+    "start": "node src/getinfo.js",
     "dev": "concurrently \"npm run server\" \"npm run watch-css\"",
-    "server": "node getinfo.js",
-    "watch-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "server": "node src/getinfo.js",
+    "watch-css": "tailwindcss -i ./public/input.css -o ./dist/output.css --watch"
   },
   "keywords": [],
   "author": "",

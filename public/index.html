@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="toastify.js"></script>
+    <link href="/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" />
+    <title>MGIUK Invoice Generator</title>
+  </head>
+
+  <body class="bg-bgimage bg-cover bg-no-repeat">
+    <!-- visit visa main -->
+
+    <div class="container mx-auto">
+      <div
+        id="Visit-Visa"
+        class="container mt-2 max-w-4xl p-4 rounded-xl border-white shadow-lg bg-white bg-opacity-90"
+      >
+        <h1 class="mb-5 text-2xl font-bold text-center">
+          MGIUK Invoice Generator
+        </h1>
+        <div class="flex-wrap flex-row mx-auto px-10">
+          <div>
+            <label class="mb-2 block font-bold text-black" for="email"
+              >Search Email:</label
+            >
+            <div class="flex flex-row">
+              <div>
+                <input
+                  class="w-auto border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out mb-4 text-gray-700 placeholder-gray-400"
+                  type="email"
+                  name="email"
+                  id="inputEmail"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  class="w-auto ml-2 rounded-lg p-2 border-blue-500 border-2 bg-blue-500 text-white hover:bg-blue-800 transition duration-300 ease-in-out mb-4 placeholder-gray-400 text-center font-bold"
+                  onclick="getContactDetails()"
+                  id="submitbutton"
+                >
+                  Search
+                </button>
+              </div>
+              <div id="loading" class="hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="44"
+                  height="44"
+                  viewBox="0 0 44 44"
+                  stroke="#0a69aa"
+                >
+                  <g fill="none" fill-rule="evenodd" stroke-width="2">
+                    <circle cx="22" cy="22" r="1">
+                      <animate
+                        attributeName="r"
+                        begin="0s"
+                        dur="1.8s"
+                        values="1; 20"
+                        calcMode="spline"
+                        keyTimes="0; 1"
+                        keySplines="0.165, 0.84, 0.44, 1"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="stroke-opacity"
+                        begin="0s"
+                        dur="1.8s"
+                        values="1; 0"
+                        calcMode="spline"
+                        keyTimes="0; 1"
+                        keySplines="0.3, 0.61, 0.355, 1"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    <circle cx="22" cy="22" r="1">
+                      <animate
+                        attributeName="r"
+                        begin="-0.9s"
+                        dur="1.8s"
+                        values="1; 20"
+                        calcMode="spline"
+                        keyTimes="0; 1"
+                        keySplines="0.165, 0.84, 0.44, 1"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="stroke-opacity"
+                        begin="-0.9s"
+                        dur="1.8s"
+                        values="1; 0"
+                        calcMode="spline"
+                        keyTimes="0; 1"
+                        keySplines="0.3, 0.61, 0.355, 1"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div id="showdetails" class="hidden items-center">
+              <div
+                class="w-full bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-opacity duration-300 ease-in-out"
+                id="contactDetailsContainer"
+              >
+                <div class="flex flex-col items-center pb-5 pt-5">
+                  <h5
+                    class="mb-1 text-xl font-medium text-gray-900 dark:text-white"
+                    id="fullnameContainer"
+                  ></h5>
+                  <span
+                    class="text-sm text-gray-500 dark:text-gray-400"
+                    id="whatsappContainer"
+                  ></span>
+                  <span
+                    class="text-sm text-gray-500 dark:text-gray-400"
+                    id="addressContainer"
+                  ></span>
+                  <span
+                    class="text-sm text-gray-500 dark:text-gray-400"
+                    id="countryContainer"
+                  ></span>
+                  <span
+                    class="text-sm text-gray-500 dark:text-gray-400"
+                    id="postalCodeContainer"
+                  ></span>
+                  <div class="flex mt-4 space-x-3 md:mt-6">
+                    <button
+                      href="#"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                      onclick="updateContactDetails()"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-full hidden bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-opacity duration-300 ease-in-out items-center"
+                id="updateDetailsContainer"
+              >
+                <div class="flex flex-col items-center pb-5 pt-5">
+                  <label
+                    for="firstnameInput"
+                    class="font-semibold text-left items-start"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    id="firstnameInput"
+                    placeholder="First Name"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  />
+                  <label for="lastnameInput" class="font-semibold text-left"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    id="lastnameInput"
+                    placeholder="Last Name"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  />
+                  <label for="addressInput" class="font-semibold text-left"
+                    >Address</label
+                  >
+                  <textarea
+                    type=""
+                    id="addressInput"
+                    placeholder="Address"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  ></textarea>
+                  <label for="whatsappInput" class="font-semibold text-left"
+                    >WhatsApp Number</label
+                  >
+                  <input
+                    type="text"
+                    id="whatsappInput"
+                    placeholder="WhatsApp Number"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  />
+                  <label for="countryInput" class="font-semibold text-left"
+                    >Country</label
+                  >
+                  <input
+                    type="text"
+                    id="countryInput"
+                    placeholder="Country"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  />
+                  <label for="postalcodeInput" class="font-semibold text-left"
+                    >Postal Code</label
+                  >
+                  <input
+                    type="text"
+                    id="postalcodeInput"
+                    placeholder="Postal Code"
+                    class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-80 rounded-lg"
+                  />
+                  <div class="flex mt-4 space-x-3 md:mt-6">
+                    <button
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                    >
+                      Update
+                    </button>
+                  </div>
+                  <div class="flex mt-4 space-x-3 md:mt-6">
+                    <button
+                      href="#"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-blue-600 bg-white rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                      onclick="cancelUpdateContactDetails()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="hidden font-montserrat mt-5 transition-opacity ease-in-out duration-300 px-10"
+          id="generators"
+        >
+          <div>
+            <hr class="border-2 border-blue-600 w-full m-auto animated-line" />
+          </div>
+          <div class="rounded-lg p-2 text-black font-bold">I want to:</div>
+          <div>
+            <select
+              aria-label="generator"
+              name="generator"
+              id="generator"
+              class="w-96 border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center selection:border-blue-500"
+            >
+              <option value="">Select an Option</option>
+              <option value="visa">Generate Visa Service Invoice</option>
+              <option value="addOns">Generate Add-ons Invoice</option>
+              <option value="payProof">Upload Payment Proof</option>
+            </select>
+          </div>
+
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="addonFormContainer"
+          ></div>
+
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="visaservicesFormContainer"
+          ></div>
+
+          <div
+            class="flex-row mt-2 p-2 border-black rounded-lg text-center hidden"
+            id="uploadFormContainer"
+          ></div>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0"></script>
+        </div>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+
+    <script src="index.js"></script>
+    <script src="hubspot.js"></script>
+    <script src="visaservices.js"></script>
+    <script src="addon.js"></script>
+    <script src="uploadForm.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+@keyframes slideIn {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+hr.animated-line {
+  animation: slideIn 1s ease-out forwards; /* Adjust the duration and easing as needed */
+}
