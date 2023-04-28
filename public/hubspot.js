@@ -7,8 +7,7 @@ const getContactDetails = async () => {
 
   const contact = await fetchContactByEmail(email);
   if (contact) {
-    console.log(contact.id);
-    displayContactDetails(contact, email);
+    displayContactDetails(contact, email, updateContact);
   } else {
     showToast("Email not found. Try again.", "warning", "center");
     document.getElementById("loading").classList.add("hidden");
@@ -28,6 +27,10 @@ const fetchContactByEmail = async (email) => {
       },
       body: JSON.stringify({ email }),
     });
+
+    if (response.status === 200) {
+      showToast("Success", "success", "right");
+    }
 
     if (response.status === 404) {
       return null;
@@ -128,7 +131,16 @@ function displayContactDetails(contact, email) {
     });
   });
 
-  // Get the container element to display contact details
+  const updateButton = document.getElementById("UpdateButton_");
+  updateButton.addEventListener("click", () => {
+    const inputValues = inputFields.reduce((acc, { id }) => {
+      const inputElement = document.getElementById(id);
+      acc[id] = inputElement.value;
+      return acc;
+    }, {});
+
+    updateContact(inputValues);
+  });
 }
 
 function updateContactDetails() {
@@ -173,3 +185,44 @@ function toggleContainers() {
     }, 300);
   }
 }
+
+const updateContact = async (inputValues) => {
+  document.getElementById("UpdateButton_").classList.add("hidden");
+  document.getElementById("loading2").classList.remove("hidden");
+  const email = document.getElementById("inputEmail").value;
+  const body = {
+    email: email,
+    firstname: inputValues["firstnameInput"],
+    lastname: inputValues["lastnameInput"],
+    address: inputValues["addressInput"],
+    hs_whatsapp_phone_number: inputValues["whatsappInput"],
+    country: inputValues["countryInput"],
+    zip: inputValues["postalcodeInput"],
+  };
+
+  console.log(body);
+
+  try {
+    const response = await fetch("/UpdateContactDetails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    console.log(response.status);
+
+    if (response.ok) {
+      document.getElementById("UpdateButton_").classList.remove("hidden");
+      document.getElementById("loading2").classList.add("hidden");
+      getContactDetails();
+      updateContactDetails();
+      showToast("Sucessfully updated contact!", "success", "right");
+    }
+  } catch (error) {
+    showToast("Failed to update contact", "error", "center");
+    document.getElementById("UpdateButton_").classList.add("hidden");
+    document.getElementById("loading2").classList.remove("hidden");
+  }
+};

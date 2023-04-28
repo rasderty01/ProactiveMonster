@@ -225,14 +225,70 @@
                   <div class="flex mt-4 space-x-3 md:mt-6">
                     <button
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                      id="UpdateButton_"
                     >
                       Update
                     </button>
                   </div>
+                  <div id="loading2" class="hidden">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="44"
+                      height="44"
+                      viewBox="0 0 44 44"
+                      stroke="#0a69aa"
+                    >
+                      <g fill="none" fill-rule="evenodd" stroke-width="2">
+                        <circle cx="22" cy="22" r="1">
+                          <animate
+                            attributeName="r"
+                            begin="0s"
+                            dur="1.8s"
+                            values="1; 20"
+                            calcMode="spline"
+                            keyTimes="0; 1"
+                            keySplines="0.165, 0.84, 0.44, 1"
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="stroke-opacity"
+                            begin="0s"
+                            dur="1.8s"
+                            values="1; 0"
+                            calcMode="spline"
+                            keyTimes="0; 1"
+                            keySplines="0.3, 0.61, 0.355, 1"
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                        <circle cx="22" cy="22" r="1">
+                          <animate
+                            attributeName="r"
+                            begin="-0.9s"
+                            dur="1.8s"
+                            values="1; 20"
+                            calcMode="spline"
+                            keyTimes="0; 1"
+                            keySplines="0.165, 0.84, 0.44, 1"
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="stroke-opacity"
+                            begin="-0.9s"
+                            dur="1.8s"
+                            values="1; 0"
+                            calcMode="spline"
+                            keyTimes="0; 1"
+                            keySplines="0.3, 0.61, 0.355, 1"
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                      </g>
+                    </svg>
+                  </div>
                   <div class="flex mt-4 space-x-3 md:mt-6">
                     <button
-                      href="#"
-                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-blue-600 bg-white rounded-lg hover:bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-blue-600 bg-white rounded-lg hover:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
                       onclick="cancelUpdateContactDetails()"
                     >
                       Cancel

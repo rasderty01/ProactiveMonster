@@ -184,6 +184,43 @@ app.post("/getinfo", async (req, res) => {
   }
 });
 
+app.post("/UpdateContactDetails", async (req, res) => {
+  const contact = await fetchContactByEmail(req.body.email);
+
+  if (!contact) {
+    res
+      .status(404)
+      .json({ error: "No contact found with this email address." });
+    return;
+  }
+
+  console.log(contact.id);
+
+  const properties = req.body;
+  const contactId = contact.id;
+
+  const config = {
+    method: "patch",
+    url: `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`,
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      properties,
+    }),
+  };
+
+  try {
+    const response = await axios(config);
+    console.log(JSON.stringify(response.data, null, 2));
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(JSON.stringify(error.response, null, 2));
+    res.status(500).json({ error: "Failed to update the contact." });
+  }
+});
+
 app.post("/VisaGenerateInvoice", async (req, res) => {
   // Retrieve the required data from the request body
   console.log("Request body:", req.body);
