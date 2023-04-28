@@ -11,16 +11,16 @@ const upload = multer({
   limits: { fileSize: 15 * 1024 * 1024 }, // Set the maximum file size limit (in bytes). In this example, it's 15 MB.
 });
 
-if (!process.env.ACCESS_TOKEN) {
-  throw new Error("Missing ACCESS_TOKEN environment variable.");
+if (!process.env.TOKEN) {
+  throw new Error("Missing TOKEN environment variable.");
 }
-const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+const TOKEN = process.env.TOKEN;
 
 const hubspotClient = new hubspot.Client({
-  accessToken: ACCESS_TOKEN,
+  accessToken: TOKEN,
 });
 
-const apiKey = ACCESS_TOKEN; // replace with your HubSpot API key
+const apiKey = TOKEN; // replace with your HubSpot API key
 
 const fetchContactByEmail = async (email) => {
   const config = {
