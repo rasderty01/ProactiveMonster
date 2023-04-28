@@ -15,9 +15,10 @@
   "version": "1.0.0",
   "main": "mgiuk.js",
   "scripts": {
-    "start": "node src/getinfo.js",
-    "build": "postcss ./public/input.css -o ./dist/output.css",
-    "postinstall": "npm run build"
+      "start": "node src/getinfo.js",
+      "build": "./node_modules/.bin/postcss ./public/input.css -o ./dist/output.css",
+      "postinstall": "npm run build"
+    
   },
   "keywords": [],
   "author": "",
