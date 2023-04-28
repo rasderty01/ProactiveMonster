@@ -163,8 +163,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "../dist")));
+app.use("/public", express.static(path.join(__dirname, "../public")));
+app.use("/dist", express.static(path.join(__dirname, "../dist")));
 // Serve static files
 
 app.post("/getinfo", async (req, res) => {
