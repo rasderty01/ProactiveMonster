@@ -16,7 +16,7 @@
   "main": "mgiuk.js",
   "scripts": {
     "start": "node src/getinfo.js",
-    "build": "postcss /public/input.css -o /dist/output.css",
+    "build": "postcss ./public/input.css -o ./dist/output.css",
     "heroku-prebuild": "npm install -g postcss-cli && npm install -g tailwindcss",
     "postinstall": "npm run build"
   },
