@@ -17,7 +17,7 @@
   "scripts": {
     "start": "node src/getinfo.js",
     "build": "postcss ./public/input.css -o ./dist/output.css",
-    "heroku-postbuild": "npm run build"
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
