@@ -48,7 +48,10 @@ let contactInfo = null;
 function displayContactDetails(contact, email) {
   document.getElementById("loading").classList.add("hidden");
   document.getElementById("submitbutton").classList.remove("hidden");
-  document.getElementById("showdetails").classList.remove("hidden");
+  const showdetails1 = document.getElementById("showdetails");
+  showdetails1.classList.remove("hidden");
+  showdetails1.classList.add("flex");
+
   console.log("Contact:", email);
   contactInfo = contact;
 

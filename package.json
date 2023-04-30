@@ -18,7 +18,9 @@
     "start": "node src/getinfo.js",
     "build": "postcss ./public/input.css -o ./dist/output.css",
     "heroku-prebuild": "npm install -g postcss-cli && npm install -g tailwindcss",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "both": "concurrently \"node src/getinfo.js\" \"npm run watch:css\"",
+    "watch:css": "tailwindcss -i ./public/input.css -o ./dist/output.css --watch"
   },
   "keywords": [],
   "author": "",
