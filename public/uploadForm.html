@@ -5,7 +5,7 @@
   <form id="uploadPayProof">
     <div class="mt-5 text-center">
       <span
-        class="font-small text-left xs:w-52 sm:w-72 md:w-80 mt-2 xs:text-xs sm:text-sm bg-yellow-100 rounded-lg p-4 inline-block"
+        class="font-small text-left xs:w-52 sm:w-72 md:w-72 mt-2 xs:text-xs sm:text-sm bg-yellow-100 rounded-lg p-4 inline-block"
         ><strong>Note:</strong> If you're the Sponsor, search for the
         Applicant's email and verify the generated info is correct.
       </span>
@@ -21,7 +21,7 @@
         type="text"
         name="invoiceID"
         id="invoiceID"
-        class="w-96 border-2 ml-2 xs:w-52 sm:w-72 md:w-80 mt-2 xs:text-xs sm:text-sm rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
+        class="w-96 border-2 ml-2 xs:w-52 sm:w-72 md:w-72 lg:w-80 mt-2 xs:text-xs sm:text-sm rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
         uppercase
         required
       />
@@ -36,7 +36,7 @@
       <select
         id="modeOfPay"
         name="modeOfPay"
-        class="w-96 xs:w-52 sm:w-72 md:w-80 xs:text-xs sm:text-sm border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
+        class="w-96 xs:w-52 sm:w-72 md:w-72 lg:w-80 xs:text-xs sm:text-sm border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
         required
       >
         <option value="UnionBank">UnionBank (PH BANK)</option>
@@ -56,19 +56,21 @@
         type="text"
         name="referenceID"
         id="referenceID"
-        class="w-96 xs:w-52 sm:w-72 md:w-80 xs:text-xs sm:text-sm border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
+        class="w-96 xs:w-52 sm:w-72 md:w-72 lg:w-80 xs:text-xs sm:text-sm border-2 ml-2 mt-2 rounded-lg p-2 text-black transition duration-300 ease-in-out placeholder-gray-400 text-center font-normal"
         required
       />
     </div>
 
     <div class="mt-5">
-      <label for="uploadFile" class="flex w-full font-bold mb-2">Upload your Proof-of-Payment:</label>
+      <label for="uploadFile" class="flex w-full font-bold mb-2"
+        >Upload your Proof-of-Payment:</label
+      >
 
       <input
         type="file"
         name="uploadFile"
         id="uploadFile"
-        class="w-auto xs:w-52 sm:w-72 md:w-80 mt-2 xs:text-xs sm:text-sm ml-2 rounded-lg p-2 text-left text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-500 hover:file:opacity-40"
+        class="w-auto xs:w-52 sm:w-72 md:w-72 lg:w-80 mt-2 xs:text-xs sm:text-sm ml-2 rounded-lg p-2 text-left text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-500 hover:file:opacity-40"
       />
     </div>
 
