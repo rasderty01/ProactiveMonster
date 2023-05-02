@@ -4,7 +4,7 @@ const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 async function accessSecretVersion(secretName) {
   const client = new SecretManagerServiceClient();
   const projectId = "mgiukglobalservices";
-  const name = `projects/${projectId}/secrets/${secretName}`;
+  const name = `projects/${projectId}/secrets/${secretName}/versions/latest`;
 
   const [version] = await client.accessSecretVersion({ name });
 
@@ -83,11 +83,15 @@ async function accessSecretVersion(secretName) {
     console.log("downloadUrl:", downloadUrl);
     console.log("contactId:", contactId);
 
+    const lastname = contactId.properties.lastname;
+    const firstname = contactId.properties.firstname;
+    const contactID = contactId.id;
+
     const properties = {
       hs_timestamp: new Date().toISOString(),
       hs_task_body: `Click the link to view Generated Invoice: ${downloadUrl}`,
       hubspot_owner_id: "805242080",
-      hs_task_subject: "New Invoice generated",
+      hs_task_subject: `New Invoice generated for ${firstname} ${lastname}`,
       hs_task_status: "WAITING",
       hs_task_priority: "HIGH",
     };
@@ -96,7 +100,7 @@ async function accessSecretVersion(secretName) {
       properties,
       associations: [
         {
-          to: { id: contactId },
+          to: { id: contactID },
           types: [
             { associationCategory: "HUBSPOT_DEFINED", associationTypeId: 10 },
           ],
@@ -288,7 +292,7 @@ async function accessSecretVersion(secretName) {
 
       if (contact && contact.id) {
         // Create the task
-        const taskId = await createHubspotTask(response.data.url, contact.id);
+        const taskId = await createHubspotTask(response.data.url, contact);
         console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
       }
       // Send the generated invoice URL as a response
@@ -361,7 +365,7 @@ async function accessSecretVersion(secretName) {
 
       if (contact && contact.id) {
         // Create the task
-        const taskId = await createHubspotTask(response1.data.url, contact.id);
+        const taskId = await createHubspotTask(response1.data.url, contact);
         console.log(`Task with ID ${taskId} created for contact ${contact.id}`);
       }
 

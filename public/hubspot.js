@@ -30,6 +30,7 @@ const fetchContactByEmail = async (email) => {
 
     if (response.status === 200) {
       showToast("Success", "success", "right");
+      document.getElementById("form79").classList.add("hidden");
     }
 
     if (response.status === 404) {
