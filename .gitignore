@@ -128,3 +128,4 @@ dist
 .pnp.*
 app.yaml
 docs_invoice_links
+secret.json

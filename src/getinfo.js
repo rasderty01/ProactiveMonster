@@ -1,12 +1,18 @@
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 
+const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+require("dotenv").config();
+
 // Function to access the secret
 async function accessSecretVersion(secretName) {
-  const client = new SecretManagerServiceClient();
+  const client = new SecretManagerServiceClient({
+    keyFilename: credentialsPath,
+  });
   const projectId = "mgiukglobalservices";
   const name = `projects/${projectId}/secrets/${secretName}/versions/latest`;
 
   const [version] = await client.accessSecretVersion({ name });
+  console.log("this has been called");
 
   return version.payload.data.toString("utf8");
 }

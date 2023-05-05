@@ -41,7 +41,7 @@
       >
         MGIUK Invoice Generator
       </h1>
-      <div class="flex flex-col justify-center">
+      <div class="flex flex-col justify-center" id="form79">
         <label class="mb-2 block font-bold text-black" for="email"
           >Search Email:</label
         >
@@ -124,177 +124,177 @@
             </svg>
           </div>
         </div>
-        <div id="showdetails" class="hidden justify-center">
-          <div
-            class="w-96 mt-5 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-opacity duration-300 ease-in-out"
-            id="contactDetailsContainer"
-          >
-            <div class="flex flex-col items-center pb-5 pt-5 px-2">
-              <h5
-                class="mb-1 text-lg text-center font-medium text-gray-900 dark:text-white"
-                id="fullnameContainer"
-              ></h5>
-              <span
-                class="text-xs text-gray-500 dark:text-gray-400"
-                id="whatsappContainer"
-              ></span>
-              <span
-                class="text-xs text-gray-500 dark:text-gray-400"
-                id="addressContainer"
-              ></span>
-              <span
-                class="text-xs text-gray-500 dark:text-gray-400"
-                id="countryContainer"
-              ></span>
-              <span
-                class="text-xs text-gray-500 dark:text-gray-400"
-                id="postalCodeContainer"
-              ></span>
-              <div class="flex mt-4 space-x-3 md:mt-6">
-                <button
-                  href="#"
-                  class="xs:w-auto ml-2 xs:m-auto xs:text-xs inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
-                  onclick="updateContactDetails()"
-                >
-                  Update
-                </button>
-              </div>
+      </div>
+      <div
+        id="showdetails"
+        class="hidden justify-center transition-all duration-500"
+      >
+        <div
+          class="w-96 mt-5 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-all duration-500"
+          id="contactDetailsContainer"
+        >
+          <div class="flex flex-col items-center pb-5 pt-5 px-2">
+            <h5
+              class="mb-1 text-lg text-center font-medium text-gray-900 dark:text-white"
+              id="fullnameContainer"
+            ></h5>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="whatsappContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="addressContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="countryContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="postalCodeContainer"
+            ></span>
+            <div class="flex mt-4 space-x-3 md:mt-6">
+              <button
+                href="#"
+                class="xs:w-auto ml-2 xs:m-auto xs:text-xs inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                onclick="updateContactDetails()"
+              >
+                Update
+              </button>
             </div>
           </div>
-          <div
-            class="w-96 mt-5 hidden bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-opacity duration-300 ease-in-out"
-            id="updateDetailsContainer"
-          >
-            <div
-              class="flex flex-col pb-5 pt-5 px-5"
-              id="updateDetailsContainer"
+        </div>
+        <div
+          class="w-96 mt-5 hidden bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 opacity-0 transform transition-all duration-500"
+          id="updateDetailsContainer"
+        >
+          <div class="flex flex-col pb-5 pt-5 px-5" id="updateDetailsContainer">
+            <label for="firstnameInput" class="font-semibold items-start"
+              >First Name</label
             >
-              <label for="firstnameInput" class="font-semibold items-start"
-                >First Name</label
+            <input
+              type="text"
+              id="firstnameInput"
+              placeholder="First Name"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            />
+            <label for="lastnameInput" class="font-semibold text-left"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              id="lastnameInput"
+              placeholder="Last Name"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            />
+            <label for="addressInput" class="font-semibold text-left"
+              >Address</label
+            >
+            <textarea
+              type=""
+              id="addressInput"
+              placeholder="Address"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            ></textarea>
+            <label for="whatsappInput" class="font-semibold text-left"
+              >WhatsApp Number</label
+            >
+            <input
+              type="text"
+              id="whatsappInput"
+              placeholder="WhatsApp Number"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            />
+            <label for="countryInput" class="font-semibold text-left"
+              >Country</label
+            >
+            <input
+              type="text"
+              id="countryInput"
+              placeholder="Country"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            />
+            <label for="postalcodeInput" class="font-semibold text-left"
+              >Postal Code</label
+            >
+            <input
+              type="text"
+              id="postalcodeInput"
+              placeholder="Postal Code"
+              class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
+            />
+            <div class="flex mt-4 space-x-3 md:mt-6">
+              <button
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                id="UpdateButton_"
               >
-              <input
-                type="text"
-                id="firstnameInput"
-                placeholder="First Name"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              />
-              <label for="lastnameInput" class="font-semibold text-left"
-                >Last Name</label
+                Update
+              </button>
+            </div>
+            <div id="loading2" class="hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                viewBox="0 0 44 44"
+                stroke="#0a69aa"
               >
-              <input
-                type="text"
-                id="lastnameInput"
-                placeholder="Last Name"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              />
-              <label for="addressInput" class="font-semibold text-left"
-                >Address</label
+                <g fill="none" fill-rule="evenodd" stroke-width="2">
+                  <circle cx="22" cy="22" r="1">
+                    <animate
+                      attributeName="r"
+                      begin="0s"
+                      dur="1.8s"
+                      values="1; 20"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.165, 0.84, 0.44, 1"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="stroke-opacity"
+                      begin="0s"
+                      dur="1.8s"
+                      values="1; 0"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.3, 0.61, 0.355, 1"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="22" cy="22" r="1">
+                    <animate
+                      attributeName="r"
+                      begin="-0.9s"
+                      dur="1.8s"
+                      values="1; 20"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.165, 0.84, 0.44, 1"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="stroke-opacity"
+                      begin="-0.9s"
+                      dur="1.8s"
+                      values="1; 0"
+                      calcMode="spline"
+                      keyTimes="0; 1"
+                      keySplines="0.3, 0.61, 0.355, 1"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
+              </svg>
+            </div>
+            <div class="flex mt-4 space-x-3 md:mt-6">
+              <button
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-blue-600 bg-white rounded-lg hover:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
+                onclick="cancelUpdateContactDetails()"
               >
-              <textarea
-                type=""
-                id="addressInput"
-                placeholder="Address"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              ></textarea>
-              <label for="whatsappInput" class="font-semibold text-left"
-                >WhatsApp Number</label
-              >
-              <input
-                type="text"
-                id="whatsappInput"
-                placeholder="WhatsApp Number"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              />
-              <label for="countryInput" class="font-semibold text-left"
-                >Country</label
-              >
-              <input
-                type="text"
-                id="countryInput"
-                placeholder="Country"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              />
-              <label for="postalcodeInput" class="font-semibold text-left"
-                >Postal Code</label
-              >
-              <input
-                type="text"
-                id="postalcodeInput"
-                placeholder="Postal Code"
-                class="border-2 my-2 p-2 placeholder-slate-500 hover:border-blue-500 w-5/6 rounded-lg"
-              />
-              <div class="flex mt-4 space-x-3 md:mt-6">
-                <button
-                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
-                  id="UpdateButton_"
-                >
-                  Update
-                </button>
-              </div>
-              <div id="loading2" class="hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  viewBox="0 0 44 44"
-                  stroke="#0a69aa"
-                >
-                  <g fill="none" fill-rule="evenodd" stroke-width="2">
-                    <circle cx="22" cy="22" r="1">
-                      <animate
-                        attributeName="r"
-                        begin="0s"
-                        dur="1.8s"
-                        values="1; 20"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.165, 0.84, 0.44, 1"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="stroke-opacity"
-                        begin="0s"
-                        dur="1.8s"
-                        values="1; 0"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.3, 0.61, 0.355, 1"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                    <circle cx="22" cy="22" r="1">
-                      <animate
-                        attributeName="r"
-                        begin="-0.9s"
-                        dur="1.8s"
-                        values="1; 20"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.165, 0.84, 0.44, 1"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="stroke-opacity"
-                        begin="-0.9s"
-                        dur="1.8s"
-                        values="1; 0"
-                        calcMode="spline"
-                        keyTimes="0; 1"
-                        keySplines="0.3, 0.61, 0.355, 1"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  </g>
-                </svg>
-              </div>
-              <div class="flex mt-4 space-x-3 md:mt-6">
-                <button
-                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-blue-600 bg-white rounded-lg hover:text-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out duration-300"
-                  onclick="cancelUpdateContactDetails()"
-                >
-                  Cancel
-                </button>
-              </div>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
