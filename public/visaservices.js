@@ -36,6 +36,7 @@ const VisaGenerateInvoice = async () => {
     firstLetterOfFirstname + firstLetterOfLastname + "-" + randomNumber;
 
   try {
+    visaButtons();
     const requestData = {
       action: "VisaServicesForm",
       email,

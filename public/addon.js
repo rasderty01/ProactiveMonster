@@ -76,6 +76,7 @@ const AddOnGenerateInvoice = async () => {
     firstLetterOfFirstname + firstLetterOfLastname + "-" + randomNumber;
 
   try {
+    addonButtons();
     const dataAddOn = {
       action: "AddOnForm",
       email,

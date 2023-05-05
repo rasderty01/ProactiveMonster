@@ -50,6 +50,7 @@ const uploadFormData = async () => {
   formData.append("randomInvoiceNumber", randomInvoiceNumber);
 
   try {
+    uploadButton();
     const uploadResponse = await fetch("/uploadForm", {
       method: "POST",
       body: formData,
