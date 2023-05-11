@@ -1,4 +1,8 @@
+const e = require("express");
+
 const VisaGenerateInvoice = async () => {
+  e.preventDefault();
+
   if (!contactInfo) {
     showToast("Please search for a contact first", "warning", "center");
     return;

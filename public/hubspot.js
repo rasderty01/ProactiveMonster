@@ -40,6 +40,7 @@ const fetchContactByEmail = async (email) => {
     return await response.json();
   } catch (error) {
     showToast("Error. Please try again.", "warning", "center");
+    console.log(error);
     return null;
   }
 };
@@ -164,29 +165,25 @@ function toggleContainers() {
   );
 
   if (!contactDetailsContainer.classList.contains("hidden")) {
-    contactDetailsContainer.classList.remove("opacity-100");
-    contactDetailsContainer.classList.add("opacity-0");
-    setTimeout(() => {
-      contactDetailsContainer.classList.add("hidden");
-    }, 300);
+    contactDetailsContainer.classList.add("opacity-0", "scale-100");
+    setTimeout(() => contactDetailsContainer.classList.add("hidden"), 100);
   } else {
-    contactDetailsContainer.classList.remove("opacity-0");
-    contactDetailsContainer.classList.add("opacity-100");
     contactDetailsContainer.classList.remove("hidden");
+    setTimeout(
+      () => contactDetailsContainer.classList.remove("opacity-0", "scale-100"),
+      0
+    );
   }
 
   if (updateDetailsContainer.classList.contains("hidden")) {
     updateDetailsContainer.classList.remove("hidden");
-    setTimeout(() => {
-      updateDetailsContainer.classList.remove("opacity-0");
-      updateDetailsContainer.classList.add("opacity-100");
-    }, 50);
+    setTimeout(
+      () => updateDetailsContainer.classList.add("opacity-100", "scale-100"),
+      0
+    );
   } else {
-    updateDetailsContainer.classList.remove("opacity-100");
-    updateDetailsContainer.classList.add("opacity-0");
-    setTimeout(() => {
-      updateDetailsContainer.classList.add("hidden");
-    }, 300);
+    updateDetailsContainer.classList.remove("opacity-100", "scale-100");
+    setTimeout(() => updateDetailsContainer.classList.add("hidden"), 500);
   }
 }
 

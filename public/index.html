@@ -41,15 +41,11 @@
       >
         MGIUK Invoice Generator
       </h1>
-      <div class="flex justify-center" id="form79">
-        <div class="flex flex-col xs:flex-col">
-          <div class="mb-2">
-            <label
-              class="block font-bold xs:text-xs sm:text-sm md:text-lg text-lg text-black"
-              for="email"
-              >Search Email:
-            </label>
-          </div>
+      <div class="flex flex-col justify-center" id="form79">
+        <label class="mb-2 block font-bold text-black" for="email"
+          >Search Email:</label
+        >
+        <div class="flex flex-row xs:flex-col">
           <div>
             <input
               class="w-auto xs:text-xs sm:text-sm border-2 border-gray-200 p-2 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out mb-4 text-gray-700 placeholder-gray-400 font-normal"
@@ -129,20 +125,35 @@
           </div>
         </div>
       </div>
-      <div id="showdetails" class="hidden justify-center">
+      <div
+        id="showdetails"
+        class="hidden justify-center transition-all duration-500"
+      >
         <div
-          class="w-96 mt-5 bg-white border border-gray-200 rounded-lg shadow-xl transition-opacity duration-300 ease-in-out"
+          class="w-96 mt-5 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-all duration-500"
           id="contactDetailsContainer"
         >
           <div class="flex flex-col items-center pb-5 pt-5 px-2">
             <h5
-              class="mb-1 text-lg text-center font-medium text-gray-900"
+              class="mb-1 text-lg text-center font-medium text-gray-900 dark:text-white"
               id="fullnameContainer"
             ></h5>
-            <span class="text-sm text-gray-500" id="whatsappContainer"></span>
-            <span class="text-v text-gray-500" id="addressContainer"></span>
-            <span class="text-sm text-gray-500" id="countryContainer"></span>
-            <span class="text-sm text-gray-500" id="postalCodeContainer"></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="whatsappContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="addressContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="countryContainer"
+            ></span>
+            <span
+              class="text-xs text-gray-500 dark:text-gray-400"
+              id="postalCodeContainer"
+            ></span>
             <div class="flex mt-4 space-x-3 md:mt-6">
               <button
                 href="#"
@@ -155,7 +166,7 @@
           </div>
         </div>
         <div
-          class="w-96 mt-5 hidden bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 transition-opacity duration-300 ease-in-out"
+          class="w-96 mt-5 hidden bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 opacity-0 transform transition-all duration-500"
           id="updateDetailsContainer"
         >
           <div class="flex flex-col pb-5 pt-5 px-5" id="updateDetailsContainer">
