@@ -94,50 +94,40 @@ loadForm("uploadForm", () => {});
   input2.classList.add("disabled:opacity-30");
   input3.classList.add("disabled:opacity-30"); */
 
+const toggleInput = (input) => {
+  if (input.hasAttribute("disabled")) {
+    input.removeAttribute("disabled");
+    input.classList.remove("disabled:opacity-30");
+  } else {
+    input.setAttribute("disabled", "");
+    input.classList.add("disabled:opacity-30");
+  }
+};
+
 const visaButtons = () => {
   let input1 = document.getElementById("mySelectVS");
   let input2 = document.getElementById("mySelectP");
   let input3 = document.getElementById("Currency");
 
-  input1.setAttribute("disabled", "");
-  input2.setAttribute("disabled", "");
-  input3.setAttribute("disabled", "");
-
-  input1.classList.add("disabled:opacity-30");
-  input2.classList.add("disabled:opacity-30");
-  input3.classList.add("disabled:opacity-30");
+  toggleInput(input1);
+  toggleInput(input2);
+  toggleInput(input3);
 };
 
 const addonButtons = () => {
-  let input1 = document.getElementById("consultation");
-  let input2 = document.getElementById("raf");
-  let input3 = document.getElementById("priorityService");
-  let input4 = document.getElementById("Currency1");
-  let input5 = document.getElementById("pas");
-  let input6 = document.getElementById("AccommodationDays");
-  let input7 = document.getElementById("mpa");
-  let input8 = document.getElementById("days");
-  let input9 = document.getElementById("har");
+  let inputs = [
+    document.getElementById("consultation"),
+    document.getElementById("raf"),
+    document.getElementById("priorityService"),
+    document.getElementById("Currency1"),
+    document.getElementById("pas"),
+    document.getElementById("AccommodationDays"),
+    document.getElementById("mpa"),
+    document.getElementById("days"),
+    document.getElementById("har"),
+  ];
 
-  input1.setAttribute("disabled", "");
-  input2.setAttribute("disabled", "");
-  input3.setAttribute("disabled", "");
-  input4.setAttribute("disabled", "");
-  input5.setAttribute("disabled", "");
-  input6.setAttribute("disabled", "");
-  input7.setAttribute("disabled", "");
-  input8.setAttribute("disabled", "");
-  input9.setAttribute("disabled", "");
-
-  input1.classList.add("disabled:opacity-30");
-  input2.classList.add("disabled:opacity-30");
-  input3.classList.add("disabled:opacity-30");
-  input4.classList.add("disabled:opacity-30");
-  input5.classList.add("disabled:opacity-30");
-  input6.classList.add("disabled:opacity-30");
-  input7.classList.add("disabled:opacity-30");
-  input8.classList.add("disabled:opacity-30");
-  input9.classList.add("disabled:opacity-30");
+  inputs.forEach(toggleInput);
 };
 
 const uploadButton = () => {
@@ -146,13 +136,8 @@ const uploadButton = () => {
   let input3 = document.getElementById("modeOfPay");
   let input4 = document.getElementById("invoiceID");
 
-  input1.setAttribute("disabled", "");
-  input2.setAttribute("disabled", "");
-  input3.setAttribute("disabled", "");
-  input4.setAttribute("disabled", "");
-
-  input1.classList.add("disabled:opacity-30");
-  input2.classList.add("disabled:opacity-30");
-  input3.classList.add("disabled:opacity-30");
-  input4.classList.add("disabled:opacity-30");
+  toggleInput(input1);
+  toggleInput(input2);
+  toggleInput(input3);
+  toggleInput(input4);
 };

@@ -113,7 +113,8 @@ const AddOnGenerateInvoice = async () => {
     downloadButton.href = data.url.url;
     downloadButton.target = "_blank";
     downloadButton.classList.remove("hidden");
-    document.getElementById("addOnLoading").classList.add("hidden"); // Add this line to show the button
+    document.getElementById("addOnLoading").classList.add("hidden");
+    addonButtons(); // Add this line to show the button
   } catch (error) {
     showToast(
       "Error generating invoice. Refreshing page....",

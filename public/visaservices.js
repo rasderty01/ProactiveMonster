@@ -68,7 +68,7 @@ const VisaGenerateInvoice = async () => {
     downloadButton.target = "_blank";
     downloadButton.classList.remove("hidden"); // Show the download button
     document.getElementById("visaloading").classList.add("hidden");
-
+    visaButtons();
     // Add this line to show the button
   } catch (error) {
     showToast(

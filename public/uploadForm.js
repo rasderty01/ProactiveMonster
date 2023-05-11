@@ -69,11 +69,14 @@ const uploadFormData = async () => {
       );
       document.getElementById("uploadLoading").classList.add("hidden");
       document.getElementById("uploadButton").classList.remove("hidden");
+      uploadButton();
     } else {
       showToast("Error uploading file.", "warning", "center");
+      uploadButton();
     }
   } catch (error) {
     showToast("Error uploading file.", "error", "center");
+    uploadButton();
   }
 };
 
